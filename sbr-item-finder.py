@@ -173,14 +173,15 @@ while True:
                     if item["Item ID"] != "KUUDRA_RELIC": #prints out any item that isn't a Kuudra Relic
                         print()
                         for title in titles: #loops through each possible data point the item could have
-                            if title in item: #checks if the item has that data point
-                                text = title + ": " + item[title] + "§r" #formats the display text to show what each data point is, and adds the reset colour on the end
-                                if "MVP" in item[title] and "+" in item[title]: #checks if an MVP+ or MVP++ rank is in the data
-                                    plusColour = item[title].split("+")[0][7] #gets the plus colour code
-                                    text += " (plus colour: " + plusColour + ")" #display the plus colour code at the end, since it can be hard to tell with just the displayed colour
-                                for code in colourCodes.keys(): #replaces all of the colour codes with actual colours to display to the console
-                                    text = text.replace(code, colourCodes[code])
-                                print(text)
+                            if title not in ["UUID", "Username"]: #doesn't print uuid or username since it's redundant
+                                if title in item: #checks if the item has that data point
+                                    text = title + ": " + item[title] + "§r" #formats the display text to show what each data point is, and adds the reset colour on the end
+                                    if "MVP" in item[title] and "+" in item[title]: #checks if an MVP+ or MVP++ rank is in the data
+                                        plusColour = item[title].split("+")[0][7] #gets the plus colour code
+                                        text += " (plus colour: " + plusColour + ")" #display the plus colour code at the end, since it can be hard to tell with just the displayed colour
+                                    for code in colourCodes.keys(): #replaces all of the colour codes with actual colours to display to the console
+                                        text = text.replace(code, colourCodes[code])
+                                    print(text)
         
         if failure == True: #checks if the Hypixel API request failed
             print("\nThe Hypixel API is currently down.")
